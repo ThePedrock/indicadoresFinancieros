@@ -1,0 +1,29 @@
+{
+	"APIKeys" : {
+		"cryptocompare" : ""
+	},
+	"indicators" : {
+		"default" : {
+			"MSPERIOD" : 14400,
+			"PAIR" : "BTC/EUR",
+			"NPERIODS" : 42,
+			"EMAPERIODS" : 15,	
+		},
+		"SMA" : {
+			"MSPERIOD" : 14400,
+			"NPERIODS" : 42
+		},
+		"EMA" : {
+			"MSPERIOD" : 14400,
+			"NPERIODS" : 42,
+			"EMAPERIODS" : 15
+		}, 
+		"VOLUME" : {
+
+		},
+		"PRICE" : {
+			"MSPERIOD" : 14400,
+			"NPERIODS" : 0
+		}
+	}
+}
