@@ -47,8 +47,7 @@ public class Chart {
 	   /**
 	   * Calcula el EMA
 	   * @param values Listado de precios.
-	   * @param period  Periodo de inicio.
-	   * @param totalperiods This returns sum of numA and numB.
+	   * @param totalperiods Número de periodos del EMA.
 	   * @return double Valor del EMA
 	   */
 	public double EMA(List<Double> values, short totalperiods) {
