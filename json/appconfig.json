@@ -7,7 +7,10 @@
 			"MSPERIOD" : 14400,
 			"PAIR" : "BTC/EUR",
 			"NPERIODS" : 42,
-			"EMAPERIODS" : 15,	
+			"EMAPERIODS" : 15,
+			"MINNEARLOW" : 0.2,
+			"MAXNEARLOW" : 0.02,
+			"PRICEOSCILLATION" : 0.3
 		},
 		"SMA" : {
 			"MSPERIOD" : 14400,
@@ -24,6 +27,22 @@
 		"PRICE" : {
 			"MSPERIOD" : 14400,
 			"NPERIODS" : 0
+		},
+		"PRICECHANGE" : {
+			"MSPERIOD" : 14400,
+			"NPERIODS" : 42
+		},
+		"FATFINGER" : {
+			"MSPERIOD" : 14400,
+			"NPERIODS" : 42,
+			"MINNEARLOW" : 0.2,
+			"PRICEOSCILLATION" : 0.3
+		},
+		"GRINDING" : {
+			"MSPERIOD" : 14400,
+			"NPERIODS" : 42,
+			"MAXNEARLOW" : 0.02,
+			"PRICEOSCILLATION" : 0.3		
 		}
 	}
 }

@@ -14,14 +14,15 @@ import org.stoneCoding.indicadoresFinancieros.market.Candlestick;
 import org.stoneCoding.indicadoresFinancieros.market.Chart;
 import org.stoneCoding.indicadoresFinancieros.ui.CommandLine.Options;
 
-public class EMACommand extends Command {
-	public static String name = "EMA";
+public class GrindingCommand extends Command {
+	public static String name = "Grinding";
 	
 	public static List<Options> requiredOptions = new ArrayList<Options>() {{
 		add(Options.PAIR);
 		add(Options.MSPERIOD);
 		add(Options.NPERIODS);
-		add(Options.EMAPERIODS);
+		add(Options.MAXNEARLOW);
+		add(Options.PRICEOSCILLATION);
 	}};
 	
 	public static String helpMessage = defaultHelpMessage(name, requiredOptions);
@@ -47,39 +48,38 @@ public class EMACommand extends Command {
 		}
 		
 		////////////////////////////////////
-		// Argumentos requeridos para EMA
+		// Argumentos requeridos para FatFinger
 		// PAIR
 		// MSPERIOD
-		// NUMPERIODS
-		// EMAPERIODS
+		// NPERIODS
+		// MAXNEARLOW
+		// PRICEOSCILLATION
 		////////////////////////////////////
 		
 		String[] argPair = pairToArray(argumentsMap.get(Options.PAIR).toString());
 		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.MSPERIOD).toString());
 		Short argNumPeriods = Short.valueOf(argumentsMap.get(Options.NPERIODS).toString());
-		Short argEMAPeriods = Short.valueOf(argumentsMap.get(Options.EMAPERIODS).toString());
+		Double argNearLow = Double.valueOf(argumentsMap.get(Options.MAXNEARLOW).toString());
+		Double argPriceOscillation = Double.valueOf(argumentsMap.get(Options.PRICEOSCILLATION).toString());
 		String ApiKey = ((JSONObject)tools.getConfig().get("APIKeys")).get(tools.API).toString();
 		
-		if (argPair!=null && argMsPeriod!=null && argNumPeriods!=null) {
+		if (argPair!=null && argMsPeriod!=null && argNumPeriods!=null) {	
 			APILiveData API = APIBuilder.buildAPILiveData(tools.API);
 			Chart Mercado = new Chart();
 			API.updatePairHistcal(tools.StringToJSON(API.getMarketHistory(argPair[0], argPair[1], 
 					argMsPeriod, argNumPeriods, ApiKey)), argPair[1], argPair[0], Mercado);
 			
 			List<Candlestick> Velas = Mercado.getToken(argPair[0]).getCandles(argPair[1]);
-			List<Double> preciosCierre = new ArrayList<Double>();
-			Velas.forEach(item -> {
-				preciosCierre.add(item.getClose());
-			});
+			Boolean resultado = Mercado.Grinding(Velas, new Long[] 
+					{Mercado.getToken(argPair[0]).getTimeFrom(), Mercado.getToken(argPair[0]).getTimeTo()},
+					argNearLow, argPriceOscillation);
 			
-			Double resultado = Mercado.EMA(preciosCierre, argEMAPeriods);
-			
-			return Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado);
+			return resultado.toString();
 		} else {
 			return errorMessage;
 		}
 	}
-	
+
 	/**
 	 * Solicita el mensaje de ayuda.
 	 * @return Mensaje de ayuda en formato String.

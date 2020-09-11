@@ -151,6 +151,15 @@ public class OptionHandler {
 				return null;
 			}
 			return SValue;
+		case Double:
+			String DData = data.replace(String.valueOf(CommandLine.space), ""); 
+			Double DValue = null;
+			try {
+				DValue = Double.valueOf(DData);
+			}  catch (NumberFormatException e) {
+				return null;
+			}
+			return DValue;
 		default:
 			return null;
 		}

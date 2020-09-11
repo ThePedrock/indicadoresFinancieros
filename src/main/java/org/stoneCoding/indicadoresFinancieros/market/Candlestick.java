@@ -33,21 +33,23 @@ public class Candlestick extends OHLC {
 	}
 
 	/**
-	 * Devuelve la variación de precio entre el máximo y el mínimo.
+	 * Devuelve la propagación del activo en el periodo.
 	 * @return double entre 1 y -1.
 	 */
-	public double getHighLow() {
+	public double getSpread() {
 		return (high/low)-1;
 	}
 	
 	/**
 	 * Devuelve si se detecta Pump o FatFinger (ambos o ninguno) en el Candlestick.
+	 * @param minNearLow Porcentaje mínimo aceptado de posición del cierre con respecto a su mínimo.
+	 * @param minOscillation Porcentaje mínimo aceptado de oscilación del cierre con respecto a sus extremos.
 	 * @return true o false
 	 */
-	public boolean getPumpFatFiger() {
-		double _nearLow = (close-low)/close;
+	public boolean getPumpFatFiger(double minNearLow, double minOscillation) {
+		double _nearLow = getNearLow();
 		
-		if (_nearLow>0.2 && getSpread()>0.3) {
+		if (_nearLow>minNearLow && getPriceOscillation()>minOscillation) {
 			return true;
 		} else {
 			return false;
@@ -56,12 +58,14 @@ public class Candlestick extends OHLC {
 	
 	/**
 	 * Devuelve si se detecta grindeo en el Candlestick.
+	 * @param maxNearLow Porcentaje máximo aceptado de posición del cierre con respecto a su mínimo.
+	 * @param minOscillation Porcentaje mínimo aceptado de oscilación del cierre con respecto a sus extremos.
 	 * @return true o false
 	 */
-	public boolean getGrinding() {
-		double _nearLow = (close-low)/close;
+	public boolean getGrinding(double maxNearLow, double minOscillation) {
+		double _nearLow = getNearLow();
 		
-		if (_nearLow<0.02 && getSpread()>0.3) {
+		if (_nearLow<maxNearLow && getPriceOscillation()>minOscillation) {
 			return true;
 		} else {
 			return false;
@@ -69,11 +73,19 @@ public class Candlestick extends OHLC {
 	}
 	
 	/**
-	 * Devuelve la propagación (liquidez).
+	 * Devuelve la oscilación del precio con respecto a sus extremos del periodo.
 	 * @return double
 	 */
-	public double getSpread() {
+	public double getPriceOscillation() {
 		return (high-low)/close;
+	}
+	
+	/**
+	 * Devuelve la cercanía al valor más bajo.
+	 * @return
+	 */
+	public double getNearLow() {
+		return (close-low)/close;
 	}
 	
 	/**

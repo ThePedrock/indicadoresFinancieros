@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import org.stoneCoding.indicadoresFinancieros.market.Candlestick;
 import org.stoneCoding.indicadoresFinancieros.main.tools;
 
 public class Chart {
@@ -116,5 +117,43 @@ public class Chart {
 	public Double Volume(String AssetFrom, String AssetTo) {
 		Asset nAsset = this.TokenMap.get(AssetTo);
 		return nAsset.getVolume(AssetFrom);	
+	}
+	
+	   /**
+	   * Diferencia de precio entre dos velas.
+	   * @param Candlestick01 Primera vela.
+	   * @param Candlestick02 Segunda vela.
+	   * @return Double Devuelve la proporción de la diferencia de precio.
+	   */	
+	public Double PriceChange(Candlestick Candlestick01, Candlestick Candlestick02) {
+		return Double.valueOf((Candlestick02.getClose()/Candlestick01.getClose()));
+	}
+	
+	   /**
+	   * Indica si en un periodo puede haber FatFinger o Pumps.
+	   * @param Estudio Array de velas.
+	   * @param Timestamp Rango de timestamps.
+	   * @param minNearLow Porcentaje mínimo aceptado de posición del cierre con respecto a su mínimo.
+	   * @param minOscillation Porcentaje mínimo aceptado de oscilación del cierre con respecto a sus extremos.
+	   * @return Boolean True si existe. False si no.
+	   */	
+	public Boolean FatFinger(List<Candlestick> Estudio, Long[] Timestamp,
+			Double minNearLow, Double minOscillation) {
+		return Boolean.valueOf(tools.fuseCandles(Estudio, Timestamp)
+				.getPumpFatFiger(minNearLow, minOscillation));
+	}
+	
+	/**
+	 * Indica si en un periodo puede haber Grinding.
+	 * @param Estudio Array de velas.
+	 * @param Timestamp Rango de timestamps.
+	 * @param maxNearLow Porcentaje máximo aceptado de posición del cierre con respecto a su mínimo.
+	 * @param minOscillation Porcentaje mínimo aceptado de oscilación del cierre con respecto a sus extremos.
+	 * @return Boolean True si existe. False si no.
+	 */
+	public Boolean Grinding(List<Candlestick> Estudio, Long[] Timestamp,
+			Double maxNearLow, Double minOscillation) {
+		return Boolean.valueOf(tools.fuseCandles(Estudio, Timestamp)
+				.getGrinding(maxNearLow, minOscillation));
 	}
 }

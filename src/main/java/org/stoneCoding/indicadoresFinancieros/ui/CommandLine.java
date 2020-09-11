@@ -21,12 +21,18 @@ public class CommandLine {
 		PRICE,
 		SMA,
 		EMA,
+		PRICECHANGE,
+		FATFINGER,
+		GRINDING
 	}	
 	public static enum Options {
 		MSPERIOD,
 		PAIR,
 		NPERIODS,
 		EMAPERIODS,
+		MINNEARLOW,
+		MAXNEARLOW,
+		PRICEOSCILLATION,
 		HELP
 	}
 	
@@ -35,6 +41,9 @@ public class CommandLine {
 		{Options.PAIR, "BASE/QUOTE del par separados por '" + CommandLine.slash + "'."},
 		{Options.NPERIODS, "Número de periodos"},
 		{Options.EMAPERIODS, "Número de periodos para cálculo del EMA."},
+		{Options.MINNEARLOW, "Diferencia mínima permitida del cierre con respecto a su mínimo en tanto por uno."},
+		{Options.MAXNEARLOW, "Diferencia máxima permitida del cierre con respecto a su mínimo en tanto por uno."},
+		{Options.PRICEOSCILLATION, "Oscillación mínima exigida del precio con respecto a sus extremos."},
 		{Options.HELP, "Ayuda."}
 	}).collect(Collectors.toMap(data -> (Options) data[0], data -> data[1].toString()));	
 	
@@ -42,6 +51,7 @@ public class CommandLine {
 		Short,
 		Long,
 		TmstmpList,
+		Double,
 		String
 	}
 	
@@ -49,6 +59,7 @@ public class CommandLine {
 		{DataType.Short, "[Short]"},
 		{DataType.Long, "[Long]"},
 		{DataType.TmstmpList, "[[Long, Long]]"},
+		{DataType.Double, "[Double]"},
 		{DataType.String, "[String]"}
 	}).collect(Collectors.toMap(data -> (DataType) data[0], data -> data[1].toString()));
 	
@@ -57,6 +68,9 @@ public class CommandLine {
 		{Options.PAIR, DataType.String},
 		{Options.NPERIODS, DataType.Short},
 		{Options.EMAPERIODS, DataType.Short},
+		{Options.MINNEARLOW, DataType.Double},
+		{Options.MAXNEARLOW, DataType.Double},
+		{Options.PRICEOSCILLATION, DataType.Double},
 		{Options.HELP, DataType.String}
 	}).collect(Collectors.toMap(data -> (Options) data[0], data -> (DataType) data[1]));
 
@@ -127,6 +141,15 @@ public class CommandLine {
 				break;
 			case SMA:
 				System.out.println(SMACommand.run(OptionHandler.parseOptions(args)));
+				break;
+			case PRICECHANGE:
+				System.out.println(PriceChangeCommand.run(OptionHandler.parseOptions(args)));
+				break;
+			case FATFINGER:
+				System.out.println(FatFingerCommand.run(OptionHandler.parseOptions(args)));
+				break;
+			case GRINDING:
+				System.out.println(GrindingCommand.run(OptionHandler.parseOptions(args)));
 				break;
 			default:
 				break;

@@ -14,14 +14,13 @@ import org.stoneCoding.indicadoresFinancieros.market.Candlestick;
 import org.stoneCoding.indicadoresFinancieros.market.Chart;
 import org.stoneCoding.indicadoresFinancieros.ui.CommandLine.Options;
 
-public class EMACommand extends Command {
-	public static String name = "EMA";
+public class PriceChangeCommand extends Command {
+	public static String name = "PriceChange";
 	
 	public static List<Options> requiredOptions = new ArrayList<Options>() {{
 		add(Options.PAIR);
 		add(Options.MSPERIOD);
 		add(Options.NPERIODS);
-		add(Options.EMAPERIODS);
 	}};
 	
 	public static String helpMessage = defaultHelpMessage(name, requiredOptions);
@@ -47,17 +46,15 @@ public class EMACommand extends Command {
 		}
 		
 		////////////////////////////////////
-		// Argumentos requeridos para EMA
+		// Argumentos requeridos para PriceChange
 		// PAIR
 		// MSPERIOD
 		// NUMPERIODS
-		// EMAPERIODS
 		////////////////////////////////////
 		
 		String[] argPair = pairToArray(argumentsMap.get(Options.PAIR).toString());
 		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.MSPERIOD).toString());
 		Short argNumPeriods = Short.valueOf(argumentsMap.get(Options.NPERIODS).toString());
-		Short argEMAPeriods = Short.valueOf(argumentsMap.get(Options.EMAPERIODS).toString());
 		String ApiKey = ((JSONObject)tools.getConfig().get("APIKeys")).get(tools.API).toString();
 		
 		if (argPair!=null && argMsPeriod!=null && argNumPeriods!=null) {
@@ -67,14 +64,14 @@ public class EMACommand extends Command {
 					argMsPeriod, argNumPeriods, ApiKey)), argPair[1], argPair[0], Mercado);
 			
 			List<Candlestick> Velas = Mercado.getToken(argPair[0]).getCandles(argPair[1]);
-			List<Double> preciosCierre = new ArrayList<Double>();
-			Velas.forEach(item -> {
-				preciosCierre.add(item.getClose());
-			});
+			Double resultado;
+			if (Velas.size()>1) {
+				resultado = (Mercado.PriceChange(Velas.get(0), Velas.get(Velas.size()-1))-1)*100;
+			} else {
+				resultado = 0.0;
+			}
 			
-			Double resultado = Mercado.EMA(preciosCierre, argEMAPeriods);
-			
-			return Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado);
+			return tools.PercentageFormat.format(resultado);
 		} else {
 			return errorMessage;
 		}
