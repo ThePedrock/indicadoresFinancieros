@@ -11,4 +11,10 @@ Se estudiarán los indicadores:
   
   · EMA (Media móvil exponencial)
   
+  · PriceChange (Variación de precio)
+  
+  · Pump/FatFinger (Bombeo / Error de Dedo Gordo)
+  
+  · Grinding (Desgaste)
+  
   · Proximamente más...
