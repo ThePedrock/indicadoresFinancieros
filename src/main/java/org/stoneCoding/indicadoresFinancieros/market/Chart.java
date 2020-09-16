@@ -126,7 +126,7 @@ public class Chart {
 	   * @return Double Devuelve la proporción de la diferencia de precio.
 	   */	
 	public Double PriceChange(Candlestick Candlestick01, Candlestick Candlestick02) {
-		return Double.valueOf((Candlestick02.getClose()/Candlestick01.getClose()));
+		return Double.valueOf((Candlestick02.getClose()/Candlestick01.getClose())-1);
 	}
 	
 	   /**
@@ -155,5 +155,35 @@ public class Chart {
 			Double maxNearLow, Double minOscillation) {
 		return Boolean.valueOf(tools.fuseCandles(Estudio, Timestamp)
 				.getGrinding(maxNearLow, minOscillation));
+	}
+	
+	   /**
+	   * Recibir niveles de Resistencia y Soporte del Punto Pivote
+	   * @param Estudio : Listado de simbolos.
+	   * @param TimeRange : Array de rango de tiempo en timestamp
+	   * @return double[] : Arreglo de 6 double indicando los niveles.
+	   */
+	public double[] getPivotPointRetracementLevels(List<Candlestick> Estudio, Long[] TimeRange) {
+		Candlestick candle = tools.fuseCandles(Estudio, TimeRange);
+		
+		double[] resistance = candle.getResistanceLevels();
+		double[] support = candle.getResistanceSupportLevels();
+		
+		double[] resultado = {support[2], support[1], support[0],
+				resistance[0], resistance[1], resistance[2]};
+	
+		return resultado;
+	}
+
+	   /**
+	   * Recibir niveles de Resistencia y Soporte de Fibonacci
+	   * @param Estudio : Listado de simbolos.
+	   * @param TimeRange : Array de rango de tiempo en timestamp
+	   * @return double[] : Arreglo de 6 double indicando los niveles.
+	   */	
+	public double[] getFibonacciRetracementLevels(List<Candlestick> Estudio, Long[] TimeRange) {
+		Candlestick candle = tools.fuseCandles(Estudio, TimeRange);
+	
+		return candle.getFibonacciResistanceSupportLevels();
 	}
 }

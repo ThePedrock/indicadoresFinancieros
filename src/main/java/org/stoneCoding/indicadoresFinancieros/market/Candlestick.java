@@ -47,9 +47,10 @@ public class Candlestick extends OHLC {
 	 * @return true o false
 	 */
 	public boolean getPumpFatFiger(double minNearLow, double minOscillation) {
-		double _nearLow = getNearLow();
+		double candleNearLow = getNearLow();
+		double candlePriceOscillation = getPriceOscillation();
 		
-		if (_nearLow>minNearLow && getPriceOscillation()>minOscillation) {
+		if (candleNearLow>minNearLow && candlePriceOscillation>minOscillation) {
 			return true;
 		} else {
 			return false;
@@ -63,9 +64,10 @@ public class Candlestick extends OHLC {
 	 * @return true o false
 	 */
 	public boolean getGrinding(double maxNearLow, double minOscillation) {
-		double _nearLow = getNearLow();
+		double candleNearLow = getNearLow();
+		double candlePriceOscillation = getPriceOscillation();
 		
-		if (_nearLow<maxNearLow && getPriceOscillation()>minOscillation) {
+		if (candleNearLow<maxNearLow && candlePriceOscillation>minOscillation) {
 			return true;
 		} else {
 			return false;

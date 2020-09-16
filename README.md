@@ -11,10 +11,14 @@ Se estudiarán los indicadores:
   
   · EMA (Media móvil exponencial)
   
-  · PriceChange (Variación de precio)
+  · Price Change (Variación de precio)
   
   · Pump/FatFinger (Bombeo / Error de Dedo Gordo)
   
   · Grinding (Desgaste)
+
+  · Pivot Points (Puntos de pivote)
+
+  · Fibonacci Retracement (Retrocesos de Fibonacci)
   
   · Proximamente más...

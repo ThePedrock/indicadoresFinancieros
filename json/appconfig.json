@@ -4,7 +4,7 @@
 	},
 	"indicators" : {
 		"default" : {
-			"MSPERIOD" : 14400,
+			"SPERIOD" : 14400,
 			"PAIR" : "BTC/EUR",
 			"NPERIODS" : 42,
 			"EMAPERIODS" : 15,
@@ -13,11 +13,11 @@
 			"PRICEOSCILLATION" : 0.3
 		},
 		"SMA" : {
-			"MSPERIOD" : 14400,
+			"SPERIOD" : 14400,
 			"NPERIODS" : 42
 		},
 		"EMA" : {
-			"MSPERIOD" : 14400,
+			"SPERIOD" : 14400,
 			"NPERIODS" : 42,
 			"EMAPERIODS" : 15
 		}, 
@@ -25,24 +25,32 @@
 
 		},
 		"PRICE" : {
-			"MSPERIOD" : 14400,
+			"SPERIOD" : 14400,
 			"NPERIODS" : 0
 		},
 		"PRICECHANGE" : {
-			"MSPERIOD" : 14400,
+			"SPERIOD" : 14400,
 			"NPERIODS" : 42
 		},
 		"FATFINGER" : {
-			"MSPERIOD" : 14400,
+			"SPERIOD" : 14400,
 			"NPERIODS" : 42,
 			"MINNEARLOW" : 0.2,
 			"PRICEOSCILLATION" : 0.3
 		},
 		"GRINDING" : {
-			"MSPERIOD" : 14400,
+			"SPERIOD" : 14400,
 			"NPERIODS" : 42,
 			"MAXNEARLOW" : 0.02,
 			"PRICEOSCILLATION" : 0.3		
+		},
+		"PIVOTPOINTS" : {
+			"SPERIOD" : 86400,
+			"NPERIODS" : 1
+		},
+		"FIBONACCIRETRACEMENT" : {
+			"SPERIOD" : 86400,
+			"NPERIODS" : 1
 		}
 	}
 }

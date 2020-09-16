@@ -19,7 +19,7 @@ public class FatFingerCommand extends Command {
 	
 	public static List<Options> requiredOptions = new ArrayList<Options>() {{
 		add(Options.PAIR);
-		add(Options.MSPERIOD);
+		add(Options.SPERIOD);
 		add(Options.NPERIODS);
 		add(Options.MINNEARLOW);
 		add(Options.PRICEOSCILLATION);
@@ -57,7 +57,7 @@ public class FatFingerCommand extends Command {
 		////////////////////////////////////
 		
 		String[] argPair = pairToArray(argumentsMap.get(Options.PAIR).toString());
-		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.MSPERIOD).toString());
+		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.SPERIOD).toString());
 		Short argNumPeriods = Short.valueOf(argumentsMap.get(Options.NPERIODS).toString());
 		Double argNearLow = Double.valueOf(argumentsMap.get(Options.MINNEARLOW).toString());
 		Double argPriceOscillation = Double.valueOf(argumentsMap.get(Options.PRICEOSCILLATION).toString());

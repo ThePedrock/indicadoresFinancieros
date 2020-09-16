@@ -19,7 +19,7 @@ public class EMACommand extends Command {
 	
 	public static List<Options> requiredOptions = new ArrayList<Options>() {{
 		add(Options.PAIR);
-		add(Options.MSPERIOD);
+		add(Options.SPERIOD);
 		add(Options.NPERIODS);
 		add(Options.EMAPERIODS);
 	}};
@@ -55,7 +55,7 @@ public class EMACommand extends Command {
 		////////////////////////////////////
 		
 		String[] argPair = pairToArray(argumentsMap.get(Options.PAIR).toString());
-		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.MSPERIOD).toString());
+		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.SPERIOD).toString());
 		Short argNumPeriods = Short.valueOf(argumentsMap.get(Options.NPERIODS).toString());
 		Short argEMAPeriods = Short.valueOf(argumentsMap.get(Options.EMAPERIODS).toString());
 		String ApiKey = ((JSONObject)tools.getConfig().get("APIKeys")).get(tools.API).toString();

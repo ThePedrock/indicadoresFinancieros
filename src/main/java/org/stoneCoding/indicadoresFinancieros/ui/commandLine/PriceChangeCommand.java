@@ -19,7 +19,7 @@ public class PriceChangeCommand extends Command {
 	
 	public static List<Options> requiredOptions = new ArrayList<Options>() {{
 		add(Options.PAIR);
-		add(Options.MSPERIOD);
+		add(Options.SPERIOD);
 		add(Options.NPERIODS);
 	}};
 	
@@ -53,7 +53,7 @@ public class PriceChangeCommand extends Command {
 		////////////////////////////////////
 		
 		String[] argPair = pairToArray(argumentsMap.get(Options.PAIR).toString());
-		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.MSPERIOD).toString());
+		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.SPERIOD).toString());
 		Short argNumPeriods = Short.valueOf(argumentsMap.get(Options.NPERIODS).toString());
 		String ApiKey = ((JSONObject)tools.getConfig().get("APIKeys")).get(tools.API).toString();
 		
@@ -66,7 +66,7 @@ public class PriceChangeCommand extends Command {
 			List<Candlestick> Velas = Mercado.getToken(argPair[0]).getCandles(argPair[1]);
 			Double resultado;
 			if (Velas.size()>1) {
-				resultado = (Mercado.PriceChange(Velas.get(0), Velas.get(Velas.size()-1))-1)*100;
+				resultado = (Mercado.PriceChange(Velas.get(0), Velas.get(Velas.size()-1)))*100;
 			} else {
 				resultado = 0.0;
 			}

@@ -14,8 +14,8 @@ import org.stoneCoding.indicadoresFinancieros.market.Candlestick;
 import org.stoneCoding.indicadoresFinancieros.market.Chart;
 import org.stoneCoding.indicadoresFinancieros.ui.CommandLine.Options;
 
-public class SMACommand extends Command {
-	public static String name = "SMA";
+public class FibonacciRetracementCommand extends Command {
+	public static String name = "FibonacciRetracement";
 	
 	public static List<Options> requiredOptions = new ArrayList<Options>() {{
 		add(Options.PAIR);
@@ -27,11 +27,6 @@ public class SMACommand extends Command {
 	
 	public static String errorMessage = "Error en las opciones de comando.";
 	
-	/**
-	 * Ejecuta el comando.
-	 * @param arguments Mapa de argumentos.
-	 * @return Resultado en formato String.
-	 */
 	public static String run(Map<Options, Object> arguments) {
 		Set<Options> received = arguments.keySet();
 		if (IsAskingHelp(received)) {
@@ -68,10 +63,18 @@ public class SMACommand extends Command {
 			Velas.forEach(item -> {
 				preciosCierre.add(item.getClose());
 			});
+
+			double[] resultado = Mercado.getFibonacciRetracementLevels(Velas, new Long[] 
+					{Mercado.getToken(argPair[0]).getTimeFrom(), Mercado.getToken(argPair[0]).getTimeTo()});
 			
-			Double resultado = Mercado.SMA(preciosCierre);
-			
-			return Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado);
+			String Message = "";
+			Message += "Resistance Lvl.3: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[5]) + "\n";
+			Message += "Resistance Lvl.2: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[4]) + "\n";
+			Message += "Resistance Lvl.1: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[3]) + "\n";
+			Message += "Support Lvl.1: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[0]) + "\n";
+			Message += "Support Lvl.2: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[1]) + "\n";
+			Message += "Support Lvl.3: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[2]) + "\n";
+			return Message;
 		} else {
 			return errorMessage;
 		}

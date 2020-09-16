@@ -23,10 +23,12 @@ public class CommandLine {
 		EMA,
 		PRICECHANGE,
 		FATFINGER,
-		GRINDING
+		GRINDING,
+		FIBONACCIRETRACEMENT,
+		PIVOTPOINTS
 	}	
 	public static enum Options {
-		MSPERIOD,
+		SPERIOD,
 		PAIR,
 		NPERIODS,
 		EMAPERIODS,
@@ -37,7 +39,7 @@ public class CommandLine {
 	}
 	
 	public final static Map<Options, String> globalOptionHelpMap = Stream.of (new Object[][] {
-		{Options.MSPERIOD, "Segundos del periodo."},
+		{Options.SPERIOD, "Segundos del periodo."},
 		{Options.PAIR, "BASE/QUOTE del par separados por '" + CommandLine.slash + "'."},
 		{Options.NPERIODS, "Número de periodos"},
 		{Options.EMAPERIODS, "Número de periodos para cálculo del EMA."},
@@ -64,7 +66,7 @@ public class CommandLine {
 	}).collect(Collectors.toMap(data -> (DataType) data[0], data -> data[1].toString()));
 	
 	public final static Map<Options, DataType> globalOptionMap = Stream.of (new Object[][] {
-		{Options.MSPERIOD, DataType.Long},
+		{Options.SPERIOD, DataType.Long},
 		{Options.PAIR, DataType.String},
 		{Options.NPERIODS, DataType.Short},
 		{Options.EMAPERIODS, DataType.Short},
@@ -150,6 +152,12 @@ public class CommandLine {
 				break;
 			case GRINDING:
 				System.out.println(GrindingCommand.run(OptionHandler.parseOptions(args)));
+				break;
+			case FIBONACCIRETRACEMENT:
+				System.out.println(FibonacciRetracementCommand.run(OptionHandler.parseOptions(args)));
+				break;
+			case PIVOTPOINTS:
+				System.out.println(PivotPointsCommand.run(OptionHandler.parseOptions(args)));
 				break;
 			default:
 				break;
