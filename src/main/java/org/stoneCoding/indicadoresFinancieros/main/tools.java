@@ -144,9 +144,13 @@ public class tools {
 			_lCandle = lCandle;
 		}
 		
+		if (period<=_lCandle.get(1).getTime()-_lCandle.get(0).getTime()) {
+			return lCandle;
+		}
+		
 		Integer index01 = 0;
 		Integer index02 = null;
-		Long accumulatedPeriod = Long.valueOf(0);
+		Long accumulatedPeriod = Long.valueOf(_lCandle.get(1).getTime()-_lCandle.get(0).getTime());
 		for (int i=1; i<_lCandle.size(); i++) {
 			if (index01==null) {
 				index01 = i;

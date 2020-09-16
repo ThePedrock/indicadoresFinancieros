@@ -59,21 +59,16 @@ public class FibonacciRetracementCommand extends Command {
 					argMsPeriod, argNumPeriods, ApiKey)), argPair[1], argPair[0], Mercado);
 			
 			List<Candlestick> Velas = Mercado.getToken(argPair[0]).getCandles(argPair[1]);
-			List<Double> preciosCierre = new ArrayList<Double>();
-			Velas.forEach(item -> {
-				preciosCierre.add(item.getClose());
-			});
-
 			double[] resultado = Mercado.getFibonacciRetracementLevels(Velas, new Long[] 
-					{Mercado.getToken(argPair[0]).getTimeFrom(), Mercado.getToken(argPair[0]).getTimeTo()});
+					{Mercado.getToken(argPair[0]).getTimeFrom(), Mercado.getToken(argPair[0]).getTimeFrom()});
 			
 			String Message = "";
 			Message += "Resistance Lvl.3: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[5]) + "\n";
 			Message += "Resistance Lvl.2: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[4]) + "\n";
 			Message += "Resistance Lvl.1: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[3]) + "\n";
-			Message += "Support Lvl.1: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[0]) + "\n";
+			Message += "Support Lvl.1: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[2]) + "\n";
 			Message += "Support Lvl.2: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[1]) + "\n";
-			Message += "Support Lvl.3: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[2]) + "\n";
+			Message += "Support Lvl.3: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[0]) + "\n";
 			return Message;
 		} else {
 			return errorMessage;

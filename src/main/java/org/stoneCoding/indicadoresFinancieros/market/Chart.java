@@ -169,7 +169,7 @@ public class Chart {
 		double[] resistance = candle.getResistanceLevels();
 		double[] support = candle.getResistanceSupportLevels();
 		
-		double[] resultado = {support[2], support[1], support[0],
+		double[] resultado = {support[0], support[1], support[2],
 				resistance[0], resistance[1], resistance[2]};
 	
 		return resultado;

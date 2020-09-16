@@ -301,7 +301,12 @@ public class APICryptocompare extends APILiveData {
 			
 			JSONArray ArrayCandles = (JSONArray)((JSONObject)data.get("Data")).get("Data");
 			List<Candlestick> lCandles = new ArrayList<Candlestick>();
-			for (int i=0; i<ArrayCandles.size(); i++) {
+			///////////////////////////////////////////////////////////
+			// Nota: La iteración empezará desde 1 dado que Cryptocompare
+			// devuelve siempre un periodo más de inicio del que se le
+			// solicita por alguna razón...
+			///////////////////////////////////////////////////////////
+			for (int i=1; i<ArrayCandles.size(); i++) {
 				JSONObject candle = (JSONObject)ArrayCandles.get(i);
 				lCandles.add(new Candlestick(
 						Double.valueOf(candle.get("open").toString()),
