@@ -231,6 +231,7 @@ public class tools {
 	    
 	    return resultado;
 	}
-	
-	
+	public static Long getDate() {
+		return Double.valueOf(System.currentTimeMillis()/1000).longValue();
+	}
 }

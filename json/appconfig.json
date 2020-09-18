@@ -10,7 +10,8 @@
 			"EMAPERIODS" : 15,
 			"MINNEARLOW" : 0.2,
 			"MAXNEARLOW" : 0.02,
-			"PRICEOSCILLATION" : 0.3
+			"PRICEOSCILLATION" : 0.3,
+			"TIMESTAMPRANGE" : null
 		},
 		"SMA" : {
 			"SPERIOD" : 14400,
@@ -49,8 +50,8 @@
 			"NPERIODS" : 1
 		},
 		"FIBONACCIRETRACEMENT" : {
-			"SPERIOD" : 86400,
-			"NPERIODS" : 1
+			"SPERIOD" : 14400,
+			"TIMESTAMPRANGE" : null
 		}
 	}
 }

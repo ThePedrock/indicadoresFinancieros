@@ -165,14 +165,8 @@ public class Chart {
 	   */
 	public double[] getPivotPointRetracementLevels(List<Candlestick> Estudio, Long[] TimeRange) {
 		Candlestick candle = tools.fuseCandles(Estudio, TimeRange);
-		
-		double[] resistance = candle.getResistanceLevels();
-		double[] support = candle.getResistanceSupportLevels();
-		
-		double[] resultado = {support[0], support[1], support[2],
-				resistance[0], resistance[1], resistance[2]};
 	
-		return resultado;
+		return candle.getResistanceSupportLevels();
 	}
 
 	   /**

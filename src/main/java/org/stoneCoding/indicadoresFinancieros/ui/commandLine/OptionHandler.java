@@ -1,5 +1,6 @@
 package org.stoneCoding.indicadoresFinancieros.ui.commandLine;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,6 +94,7 @@ public class OptionHandler {
 		for (int i=0; i<data.length()-1; i++) {
 			if (!read) {
 				read = data.substring(i, i+1).contentEquals(String.valueOf(CommandLine.openArray))?true:read;
+				i++;
 			} else {
 				read = data.substring(i, i+1).contentEquals(String.valueOf(CommandLine.closeArray))?false:read;
 			}
@@ -131,11 +133,11 @@ public class OptionHandler {
 			Long[] aLong = null;
 			if (aData!=null) {
 				aLong = new Long[aData.length];
-				
 				try {
 					for(int i=0; i<aData.length; i++) {
 						aLong[i] = Long.valueOf(aData[i]);
 					}
+					Arrays.sort(aLong);
 				} catch (NumberFormatException e) {
 					return null;					
 				}

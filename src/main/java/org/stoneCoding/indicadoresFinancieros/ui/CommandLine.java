@@ -35,6 +35,7 @@ public class CommandLine {
 		MINNEARLOW,
 		MAXNEARLOW,
 		PRICEOSCILLATION,
+		TIMESTAMPRANGE,
 		HELP
 	}
 	
@@ -46,6 +47,7 @@ public class CommandLine {
 		{Options.MINNEARLOW, "Diferencia mínima permitida del cierre con respecto a su mínimo en tanto por uno."},
 		{Options.MAXNEARLOW, "Diferencia máxima permitida del cierre con respecto a su mínimo en tanto por uno."},
 		{Options.PRICEOSCILLATION, "Oscillación mínima exigida del precio con respecto a sus extremos."},
+		{Options.TIMESTAMPRANGE, "Rango de timestamps del acote."},
 		{Options.HELP, "Ayuda."}
 	}).collect(Collectors.toMap(data -> (Options) data[0], data -> data[1].toString()));	
 	
@@ -73,6 +75,7 @@ public class CommandLine {
 		{Options.MINNEARLOW, DataType.Double},
 		{Options.MAXNEARLOW, DataType.Double},
 		{Options.PRICEOSCILLATION, DataType.Double},
+		{Options.TIMESTAMPRANGE, DataType.TmstmpList},
 		{Options.HELP, DataType.String}
 	}).collect(Collectors.toMap(data -> (Options) data[0], data -> (DataType) data[1]));
 

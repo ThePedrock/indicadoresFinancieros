@@ -20,7 +20,7 @@ public class FibonacciRetracementCommand extends Command {
 	public static List<Options> requiredOptions = new ArrayList<Options>() {{
 		add(Options.PAIR);
 		add(Options.SPERIOD);
-		add(Options.NPERIODS);
+		add(Options.TIMESTAMPRANGE);
 	}};
 	
 	public static String helpMessage = defaultHelpMessage(name, requiredOptions);
@@ -44,12 +44,30 @@ public class FibonacciRetracementCommand extends Command {
 		// Argumentos requeridos para SMA
 		// PAIR
 		// MSPERIOD
-		// NUMPERIODS
+		// TIMESTAMPRANGE
 		////////////////////////////////////
 		
 		String[] argPair = pairToArray(argumentsMap.get(Options.PAIR).toString());
 		Long argMsPeriod = Long.valueOf(argumentsMap.get(Options.SPERIOD).toString());
-		Short argNumPeriods = Short.valueOf(argumentsMap.get(Options.NPERIODS).toString());
+		Short argNumPeriods;
+		Long[] argTmstmpRange;
+		
+		try {
+			argTmstmpRange = (Long[])argumentsMap.get(Options.TIMESTAMPRANGE);
+			
+			if (argMsPeriod!=null) {
+				argNumPeriods = Double.valueOf((tools.getDate()-argTmstmpRange[0])/argMsPeriod).shortValue();
+			} else {
+				argNumPeriods = null;
+			}
+		//} catch (ClassCastException e) {
+		} catch (Exception e) {
+			argTmstmpRange = null;
+			argNumPeriods = null;
+			argMsPeriod = null;
+		}
+		
+		
 		String ApiKey = ((JSONObject)tools.getConfig().get("APIKeys")).get(tools.API).toString();
 		
 		if (argPair!=null && argMsPeriod!=null && argNumPeriods!=null) {
@@ -59,8 +77,7 @@ public class FibonacciRetracementCommand extends Command {
 					argMsPeriod, argNumPeriods, ApiKey)), argPair[1], argPair[0], Mercado);
 			
 			List<Candlestick> Velas = Mercado.getToken(argPair[0]).getCandles(argPair[1]);
-			double[] resultado = Mercado.getFibonacciRetracementLevels(Velas, new Long[] 
-					{Mercado.getToken(argPair[0]).getTimeFrom(), Mercado.getToken(argPair[0]).getTimeFrom()});
+			double[] resultado = Mercado.getFibonacciRetracementLevels(Velas, argTmstmpRange);
 			
 			String Message = "";
 			Message += "Resistance Lvl.3: " + Mercado.getToken(argPair[0]).getFormat(argPair[1]).format(resultado[5]) + "\n";
