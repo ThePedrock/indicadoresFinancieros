@@ -1,6 +1,6 @@
 # Indicadores Financieros
 
-<img width="350" alt="image" src="https://github.com/ThePedrock/indicadoresFinancieros/assets/54954518/8b1f8096-0a5d-4106-900c-ba0cfe5c3047">
+<img width="350" alt="image" src="https://raw.githubusercontent.com/ThePedrock/indicadoresFinancieros/master/src/main/resources/demo.png">
 
 Aplicación de Consola para el estudio de Indicadores Financieros
 
