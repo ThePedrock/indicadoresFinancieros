@@ -1,5 +1,7 @@
 # Indicadores Financieros
 
+<img width="350" alt="image" src="https://github.com/ThePedrock/indicadoresFinancieros/assets/54954518/8b1f8096-0a5d-4106-900c-ba0cfe5c3047">
+
 Aplicación de Consola para el estudio de Indicadores Financieros
 
 Para más apoyo, por favor, revisad la playlist de tutoriales:
